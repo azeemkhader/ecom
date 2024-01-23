@@ -10,7 +10,7 @@
         {% for products in product_printing %}
        
         <div class="col-4">
-            <a href="{% url 'product_detail' %}"><img src="{{ products.image.url }}"></a>
+            <a href="{% url 'product_detail'  products.id %}"><img src="{{ products.image.url }}"></a>
             <h4>{{products.title}}</h4>
             <div class="rating">
                 <i class="fa fa-star"></i>
