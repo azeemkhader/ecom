@@ -1,5 +1,23 @@
-<div style="width: 691px; height: 222px; position: relative">
-    <div style="width: 196px; height: 222px; left: 0px; top: 0px; position: absolute; background: #D9D9D9"></div>
-    <div style="width: 196px; height: 222px; left: 235px; top: 0px; position: absolute; background: #008000"></div>
-    <div style="width: 196px; height: 222px; left: 495px; top: 0px; position: absolute; background: #008000"></div>
+<div class="form-container">
+  <div class="form-btn">
+      <span onclick="login()">Login</span>
+      <span onclick="register()">Register</span>
+      <hr id="Indicator">
   </div>
+  <form id="LoginForm" method="post" enctype="multipart/form-data">
+      <input type="text" placeholder="Username" required name="user">
+      <input type="password" placeholder="Password" required name="pass">
+      <button type="submit" name="login" class="btn">Login</button>
+
+      <a href="">Forget Password</a>
+  </form>
+
+  <form id="RegForm" enctype="multipart/form-data" method="post">
+      <input type="text" required placeholder="Username" name="username" minlength="5" maxlength="12">
+      <input type="email" required placeholder="Email" name="email">
+      <input type="password" required placeholder="Password" name="password" minlength="8">
+      <input type="text" required placeholder="address" name="address" minlength="8">
+      <input type="number" required placeholder="Phone Number" name="phone" minlength="10" maxlength="10">
+      <button type="submit" class="btn" name="register">Register</button>
+  </form>
+</div>
