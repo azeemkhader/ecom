@@ -3,5 +3,11 @@
 
 
 {% block content %}
-{% include 'cart_content.html' %}
+    {% if messages %}
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{message}}</li>
+        {% endfor %}
+    {% else %}
+        {% include 'cart_content.html' %}
+    {% endif %}
 {% endblock content %}
