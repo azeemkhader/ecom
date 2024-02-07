@@ -30,6 +30,7 @@ def account(request):
                 )
 
                 customer=Customers.objects.create(
+                    name=username,
                     user=user,
                     address=address,
                     phone=phone

@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from . models import Order,OrderItem
 from products.models import Products
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -19,7 +20,7 @@ def cart_display(request):
 
 
         return render(request,'cart.html',context)
-
+@login_required(login_url='account')
 def add_to_cart(request):
     if request.POST:
         user=request.user
@@ -39,6 +40,7 @@ def add_to_cart(request):
         )
         if created:
              ordered_item.quantity=quantity
+
              ordered_item.save()
         else:
              ordered_item.quantity=ordered_item.quantity+quantity
@@ -66,7 +68,9 @@ def checkout(request) :
                 )
                 if cart_obj:
                     cart_obj.order_status=Order.ORDER_CONFIRMED
+                    cart_obj.total_price=total
                     cart_obj.save()
+                    
                     status_message="Thanks, Your order has been confirmed "
                     messages.success(request,status_message)
                 else:
@@ -79,6 +83,18 @@ def checkout(request) :
                 messages.error(request,status_message)
 
       return redirect('cart')
+@login_required(login_url='account')
+def show_orders(request):
+     
+     user=request.user
+     customer=user.customer_profile
+     all_orders=Order.objects.filter(owner=customer).exclude(order_status=Order.CART_STAGE)
+     context={'orders':all_orders}
+
+     return render(request,'order.html',context)
+
+     
+     
 
 
            
